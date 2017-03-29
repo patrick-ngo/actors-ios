@@ -13,11 +13,15 @@ import SwiftyJSON
 class MainViewController: UITableViewController
 {
     var fullRefreshing = false
-    var page = 3                    //current page number
-    var movieData: [JSON]? = nil    //data list received from network
+    var page = 1                    //current page number
+    var movieData: [JSON]? = []    //data list received from network
+    
+    var allowLoadMoreAtBottom = true
+    var bottomLoading = false
     
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -32,11 +36,10 @@ class MainViewController: UITableViewController
         
         //load initial data
         loadData()
-        
-       
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -49,7 +52,7 @@ class MainViewController: UITableViewController
         }
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl!.tintColor = UIColor.blue
+        self.refreshControl!.tintColor = UIColor.white
         self.refreshControl!.addTarget(self, action: #selector(MainViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl!)
     }
@@ -58,7 +61,8 @@ class MainViewController: UITableViewController
     func refresh(sender:AnyObject)
     {
         self.fullRefreshing = true
-        self.page = 1   //reset page to 1
+        self.page = 1               //reset page to 1
+
         self.loadData()
     }
     
@@ -73,14 +77,24 @@ class MainViewController: UITableViewController
                     
                     let movies = JSON(result as Any)
                     
+                    if self.fullRefreshing
+                    {
+                        self.movieData?.removeAll() //remove all elements when full refresh
+                        self.fullRefreshing = false
+                    }
+                    
                     //set data
-                    self.movieData = movies["data"].arrayValue
+                    self.movieData?.append(contentsOf: movies["data"].arrayValue)
+                    
+                    //stop refresh animation
+                    self.refreshControl?.endRefreshing()
+                    
+                    
+                    self.bottomLoading = false
                     
                     //refresh data
                     self.tableView.reloadData()
                     
-                    //stop refresh animation
-                    self.refreshControl?.endRefreshing()
                 }
         })
     }
@@ -92,47 +106,107 @@ class MainViewController: UITableViewController
     
     
     
+    // MARK: - ScrollView delegate
     
-    
-    
-    
-    
-    
-    
-    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        if(!self.allowLoadMoreAtBottom)
+        {
+            return
+        }
+        
+        let scrollViewHeight = scrollView.frame.size.height
+        let scrollContentSizeHeight = scrollView.contentSize.height-100
+        let scrollOffset = scrollView.contentOffset.y
+        
+        if (!self.bottomLoading && scrollOffset + scrollViewHeight > scrollContentSizeHeight) {
+            //We have scrolled near to the end, load the next page
+            
+            //add a page
+            self.bottomLoading = true
+            self.page += 1
+            self.tableView.reloadData()
+            
+            self.loadData()
+
+        }
+    }
+
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int
+    {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        
+        var bottomLoading = 0
+        if(self.bottomLoading) {
+            bottomLoading = 1
+        }
+        
+        return 1+bottomLoading
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         // #warning Incomplete implementation, return the number of rows
-        if let movieData = self.movieData
+        
+        if section == 0
         {
-            return movieData.count
+            if let movieData = self.movieData
+            {
+                return movieData.count
+            }
+            else
+            {
+                return 0
+            }
         }
+        //loading section
         else
         {
-            return 0
+            return 1
         }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        //get the cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TestCell", for: indexPath) as! TableViewCell
+        //regular cells
+        if indexPath.section == 0
+        {
+            //get the cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TestCell", for: indexPath) as! TableViewCell
 
-        //get the entry info
-        let jsonData = movieData![indexPath.row].dictionaryValue
-        
-        // Configure the cell...
-        cell.populateData(data: jsonData)
+            //get the entry info
+            let jsonData = movieData![indexPath.row].dictionaryValue
+            
+            // Configure the cell...
+            cell.populateData(data: jsonData)
 
-        return cell
+            return cell
+        }
+            
+        //Loading cell
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as! LoadingCell
+            cell.startAnimating()
+            return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if indexPath.section == 1
+        {
+            return 50
+        }
+        else
+        {
+            return 217
+        }
     }
  
 

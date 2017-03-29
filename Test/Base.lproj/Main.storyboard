@@ -40,7 +40,7 @@
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YPj-Li-hod">
                                                     <rect key="frame" x="9" y="9" width="86" height="86"/>
-                                                    <color key="backgroundColor" red="0.15771812080536912" green="0.3523489932885906" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="86" id="5kw-DY-8g5"/>
                                                         <constraint firstAttribute="height" constant="86" id="bxi-G8-boN"/>
@@ -138,6 +138,40 @@
                                     <outlet property="ratingLabel" destination="Zqj-xQ-Oc1" id="uJH-k7-cP5"/>
                                     <outlet property="thumbnailContainerView" destination="Td6-0Q-P9T" id="ykf-iQ-wYp"/>
                                     <outlet property="thumbnailImageView" destination="YPj-Li-hod" id="mWT-CR-EFn"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="50" id="ZrP-5v-L6I" customClass="LoadingCell" customModule="Test" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="245" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZrP-5v-L6I" id="L4G-JK-qgR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adj-cs-BOf">
+                                            <rect key="frame" x="4" y="4" width="367" height="44"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ah9-tg-xnf">
+                                                    <rect key="frame" x="173" y="12" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="0.0" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="Ah9-tg-xnf" firstAttribute="centerX" secondItem="adj-cs-BOf" secondAttribute="centerX" id="C3m-M0-d5R"/>
+                                                <constraint firstItem="Ah9-tg-xnf" firstAttribute="centerY" secondItem="adj-cs-BOf" secondAttribute="centerY" id="reN-GL-Iwg"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="adj-cs-BOf" secondAttribute="trailing" constant="-4" id="AzA-Ws-3Zn"/>
+                                        <constraint firstItem="adj-cs-BOf" firstAttribute="leading" secondItem="L4G-JK-qgR" secondAttribute="leadingMargin" constant="-4" id="KPJ-VD-tjq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="adj-cs-BOf" secondAttribute="bottom" constant="-6" id="T45-V8-NsM"/>
+                                        <constraint firstItem="adj-cs-BOf" firstAttribute="top" secondItem="L4G-JK-qgR" secondAttribute="topMargin" constant="-4" id="aZ1-KD-M7r"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="Ah9-tg-xnf" id="MLb-48-hsb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
