@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  Test
 //
-//  Created by Netccentric on 28/3/17.
+//  Created by Patrick Ngo on 28/3/17.
 //  Copyright © 2017 ngo. All rights reserved.
 //
 
@@ -23,13 +23,6 @@ class MainViewController: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         
         //attach refresh control
         enableRefreshControl()
@@ -180,8 +173,7 @@ class MainViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // #warning Incomplete implementation, return the number of rows
-        
+        //regular section
         if section == 0
         {
             if let movieData = self.movieData
@@ -229,10 +221,12 @@ class MainViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
+        //loading cell
         if indexPath.section == 1
         {
             return 50
         }
+        //actor cell
         else
         {
             return 217

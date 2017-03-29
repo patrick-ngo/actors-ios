@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  Test
 //
-//  Created by Netccentric on 29/3/17.
+//  Created by Patrick Ngo on 29/3/17.
 //  Copyright © 2017 ngo. All rights reserved.
 //
 
@@ -17,14 +17,7 @@ class DetailViewController: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
-        
         //load initial data
         loadData()
     }
@@ -38,6 +31,7 @@ class DetailViewController: UITableViewController
     
     func loadData()
     {
+        //get list of movies
         actorMovies = (self.actorData?["known_for"]!.arrayValue)!
     }
 
