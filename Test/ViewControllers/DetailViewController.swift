@@ -64,6 +64,18 @@ class DetailViewController: UITableViewController
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 1
+        {
+            return "Filmography"
+        }
+        else
+        {
+            return nil
+        }
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {

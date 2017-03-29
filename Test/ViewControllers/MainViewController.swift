@@ -38,6 +38,36 @@ class MainViewController: UITableViewController
         loadData()
     }
 
+    @IBAction func orderBy(_ sender: Any)
+    {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let orderByDateButton = UIAlertAction(title: "Order by name", style: .default, handler:
+        { (action) -> Void in
+                
+                //TODO: sort by name here
+                
+        })
+        
+        let  orderByPopularityButton = UIAlertAction(title: "Order by popularity", style: .default, handler:
+            { (action) -> Void in
+                
+                //TODO: sort by poplarity here
+        })
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler:
+        { (action) -> Void in
+            
+        })
+        
+        
+        alertController.addAction(orderByDateButton)
+        alertController.addAction(orderByPopularityButton)
+        alertController.addAction(cancelButton)
+        
+        self.navigationController!.present(alertController, animated: true, completion: nil)
+        
+    }
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()

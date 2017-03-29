@@ -29,7 +29,11 @@ class TableViewCell: UITableViewCell {
         
         //rounded corners
         containerView.roundCorners()
-        ratingContainerView.roundCorners()
+        
+        if (ratingContainerView != nil)
+        {
+            ratingContainerView.roundCorners()
+        }
         
         //make photo round
         thumbnailContainerView.makeCircular()
@@ -51,7 +55,11 @@ class TableViewCell: UITableViewCell {
         nameLabel.text = data["name"]?.stringValue
         detailLabel.text = data["description"]?.stringValue
         locationLabel.text = data["location"]?.stringValue
-        ratingLabel.text = String(rating)
+        
+        if ratingLabel != nil
+        {
+            ratingLabel.text = String(rating)
+        }
         
         if let profileImagePath = data["profile_path"]?.stringValue
         {

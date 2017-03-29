@@ -17,10 +17,14 @@ class MovieCell: UITableViewCell
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var votesLabel: UILabel!
     
+    @IBOutlet weak var ratingContainerView: UIView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        ratingContainerView.roundCorners()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
