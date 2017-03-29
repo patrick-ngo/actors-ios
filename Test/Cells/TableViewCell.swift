@@ -12,16 +12,28 @@ import SDWebImage
 
 class TableViewCell: UITableViewCell {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
+    @IBOutlet weak var thumbnailContainerView: UIView!
+    @IBOutlet weak var ratingContainerView: UIView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        //rounded corners
+        containerView.roundCorners()
+        ratingContainerView.roundCorners()
+        
+        //make photo round
+        thumbnailContainerView.makeCircular()
+        thumbnailImageView.makeCircular()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,7 +54,5 @@ class TableViewCell: UITableViewCell {
         {
             thumbnailImageView.sd_setImage(with: URL(string: profileImagePath))
         }
-
-//        thumbnailImageView.sd_setImage(with: URL(string: (data["profile_path"]?.stringValue)!))
     }
 }

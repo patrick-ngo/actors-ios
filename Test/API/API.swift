@@ -17,20 +17,12 @@ class API: NSObject
         return  "http://test.gotouche.com/rest/"
     }
     
-    class func apiKey() -> String
-    {
-        return "328c283cd27bd1877d9080ccb1604c91"
-    }
-    
     class func callMethod(method: String, parameters: [String:Any], completionHandler:@escaping (AnyObject?)->())
     {
         DispatchQueue.global(qos: .default).async
         {
-            var params = parameters
-            
-//            //add api key to each method call
-//            params["api_key"] = self.apiKey()
-            
+            let params = parameters
+
             //network request on background thread
             Alamofire.request( self.baseUrl() + method, method: .get, parameters: params).responseJSON
             {   response in

@@ -65,38 +65,6 @@ class MainViewController: UITableViewController
     
     func loadData()
     {
-//        let parameters: Parameters = ["primary_release_date.lte":"2016-12-25", "sort_by":"release_date.desc", "page":String(self.page)]
-//        
-//        API.callMethod(method: "discover/movie", parameters: parameters, completionHandler:
-//            {   (result) -> () in
-//                
-//                if(result != nil)
-//                {
-//                    
-//                    let movies = JSON(result as Any)
-//                    
-//                    self.movieData = movies["results"].arrayValue
-//                    
-////                    for item in movies["results"].arrayValue
-////                    {
-////                        print(item["original_title"].stringValue)
-////                        //                    print(item["overview"].stringValue)
-////                        //                    print(item["poster_path"].stringValue)
-////                    }
-//                    
-//                    
-//                    //refresh data
-//                    self.tableView.reloadData()
-//                    
-//                    //stop refresh animation
-//                    self.refreshControl?.endRefreshing()
-//                }
-//        })
-        
-        
-        
-//        let parameters: Parameters = ["primary_release_date.lte":"2016-12-25", "sort_by":"release_date.desc", "page":String(self.page)]
-        
         API.callMethod(method: "actors", parameters: ["page":String(self.page)], completionHandler:
             {   (result) -> () in
                 
@@ -105,15 +73,8 @@ class MainViewController: UITableViewController
                     
                     let movies = JSON(result as Any)
                     
+                    //set data
                     self.movieData = movies["data"].arrayValue
-                    
-                    //                    for item in movies["results"].arrayValue
-                    //                    {
-                    //                        print(item["original_title"].stringValue)
-                    //                        //                    print(item["overview"].stringValue)
-                    //                        //                    print(item["poster_path"].stringValue)
-                    //                    }
-                    
                     
                     //refresh data
                     self.tableView.reloadData()
