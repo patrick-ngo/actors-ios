@@ -44,11 +44,14 @@ class TableViewCell: UITableViewCell {
     
     func populateData(data: [String:JSON])
     {
+        //round down rating
+        let rating = round((Double(data["popularity"]!.stringValue))! * 100) / 100
+        
         //configure cell here
         nameLabel.text = data["name"]?.stringValue
         detailLabel.text = data["description"]?.stringValue
         locationLabel.text = data["location"]?.stringValue
-        ratingLabel.text = data["popularity"]?.stringValue
+        ratingLabel.text = String(rating)
         
         if let profileImagePath = data["profile_path"]?.stringValue
         {
