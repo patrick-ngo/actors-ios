@@ -37,15 +37,17 @@ class MainViewController: UITableViewController
         
         let orderByDateButton = UIAlertAction(title: "Order by name", style: .default, handler:
         { (action) -> Void in
-                
-                //TODO: sort by name here
+            
+            self.movieData?.sort(by: { $0["name"].stringValue < $1["name"].stringValue})
+            self.tableView.reloadData()
                 
         })
         
         let  orderByPopularityButton = UIAlertAction(title: "Order by popularity", style: .default, handler:
             { (action) -> Void in
-                
-                //TODO: sort by poplarity here
+                            
+            self.movieData?.sort(by: { $0["popularity"].doubleValue > $1["popularity"].doubleValue } )
+            self.tableView.reloadData()
         })
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler:
@@ -99,6 +101,7 @@ class MainViewController: UITableViewController
                 {
                     
                     let movies = JSON(result as Any)
+                    
                     
                     if self.fullRefreshing
                     {
