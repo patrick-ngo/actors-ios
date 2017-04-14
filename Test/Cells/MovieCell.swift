@@ -25,6 +25,7 @@ class MovieCell: UITableViewCell
         // Initialization code
         
         ratingContainerView.roundCorners()
+        thumbnailImageView.roundCorners()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
