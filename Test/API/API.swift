@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class API: NSObject
 {
-    class func baseUrl() -> String
+    fileprivate class func baseUrl() -> String
     {
         return  "http://test.gotouche.com/rest/"
     }

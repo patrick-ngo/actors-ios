@@ -29,7 +29,7 @@ class DetailViewController: UITableViewController
     }
 
     
-    func loadData()
+    fileprivate func loadData()
     {
         //get list of movies
         actorMovies = (self.actorData?["known_for"]!.arrayValue)!

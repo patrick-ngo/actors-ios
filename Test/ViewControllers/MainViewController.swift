@@ -69,7 +69,7 @@ class MainViewController: UITableViewController
         // Dispose of any resources that can be recreated.
     }
     
-    func enableRefreshControl()
+    fileprivate func enableRefreshControl()
     {
         if(refreshControl != nil)
         {
@@ -92,7 +92,7 @@ class MainViewController: UITableViewController
     }
     
     
-    func loadData()
+    fileprivate func loadData()
     {
         API.callMethod(method: "actors", parameters: ["page":String(self.page)], completionHandler:
             {   (result) -> () in

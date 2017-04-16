@@ -46,10 +46,20 @@ class MovieCell: UITableViewCell
         
 
         //configure cell here
-        nameLabel.text = data["original_title"]?.stringValue
-        dateLabel.text = data["release_date"]?.stringValue
-        ratingLabel.text = data["vote_average"]?.stringValue
-        votesLabel.text = (data["vote_count"]?.stringValue)! + " votes"
+        nameLabel.text = data["original_title"]?.string
+        dateLabel.text = data["release_date"]?.string
+        
+        if let rating = data["vote_average"]?.double
+        {
+            ratingLabel.text = "\(rating)"
+        }
+        
+        
+        if let voteCount = data["vote_count"]?.string
+        {
+            votesLabel.text = voteCount + " votes"
+        }
+        
         
         if let backdropImagePath = data["backdrop_path"]?.stringValue
         {

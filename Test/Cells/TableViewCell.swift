@@ -30,7 +30,8 @@ class TableViewCell: UITableViewCell {
         //rounded corners
         containerView.roundCorners()
         
-        if (ratingContainerView != nil)
+        //possibly no rating container, depending on which screen we're on
+        if let ratingContainerView = ratingContainerView
         {
             ratingContainerView.roundCorners()
         }
@@ -48,20 +49,19 @@ class TableViewCell: UITableViewCell {
     
     func populateData(data: [String:JSON])
     {
-        //round down rating
-        let rating = round((Double(data["popularity"]!.stringValue))! * 100) / 100
-        
-        //configure cell here
-        nameLabel.text = data["name"]?.stringValue
-        detailLabel.text = data["description"]?.stringValue
-        locationLabel.text = data["location"]?.stringValue
-        
-        if let ratingLabel = ratingLabel
+        //round down rating, if we have a rating label
+        if let rating = data["popularity"]?.double, let ratingLabel = ratingLabel
         {
-            ratingLabel.text = String(rating)
+            let roundedRating = Double( round(rating * 100) / 100)
+            ratingLabel.text = "\(roundedRating)"
         }
         
-        if let profileImagePath = data["profile_path"]?.stringValue
+        //configure cell here
+        nameLabel.text = data["name"]?.string
+        detailLabel.text = data["description"]?.string
+        locationLabel.text = data["location"]?.string
+        
+        if let profileImagePath = data["profile_path"]?.string
         {
             thumbnailImageView.sd_setImage(with: URL(string: profileImagePath))
         }
