@@ -56,7 +56,7 @@ class TableViewCell: UITableViewCell {
         detailLabel.text = data["description"]?.stringValue
         locationLabel.text = data["location"]?.stringValue
         
-        if ratingLabel != nil
+        if let ratingLabel = ratingLabel
         {
             ratingLabel.text = String(rating)
         }

@@ -60,7 +60,7 @@ class MainViewController: UITableViewController
         alertController.addAction(orderByPopularityButton)
         alertController.addAction(cancelButton)
         
-        self.navigationController!.present(alertController, animated: true, completion: nil)
+        navigationController!.present(alertController, animated: true, completion: nil)
         
     }
     override func didReceiveMemoryWarning()
@@ -71,7 +71,7 @@ class MainViewController: UITableViewController
     
     func enableRefreshControl()
     {
-        if(self.refreshControl != nil)
+        if(refreshControl != nil)
         {
             return
         }
@@ -85,10 +85,10 @@ class MainViewController: UITableViewController
     
     func refresh(sender:AnyObject)
     {
-        self.fullRefreshing = true
-        self.page = 1               //reset page to 1
+        fullRefreshing = true
+        page = 1               //reset page to 1
 
-        self.loadData()
+        loadData()
     }
     
     
@@ -136,7 +136,7 @@ class MainViewController: UITableViewController
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        if(!self.allowLoadMoreAtBottom)
+        if(!allowLoadMoreAtBottom)
         {
             return
         }
@@ -145,15 +145,15 @@ class MainViewController: UITableViewController
         let scrollContentSizeHeight = scrollView.contentSize.height-100
         let scrollOffset = scrollView.contentOffset.y
         
-        if (!self.bottomLoading && scrollOffset + scrollViewHeight > scrollContentSizeHeight) {
+        if (!bottomLoading && scrollOffset + scrollViewHeight > scrollContentSizeHeight) {
             //We have scrolled near to the end, load the next page
             
             //add a page
-            self.bottomLoading = true
-            self.page += 1
-            self.tableView.reloadData()
+            bottomLoading = true
+            page += 1
+            tableView.reloadData()
             
-            self.loadData()
+            loadData()
 
         }
     }
@@ -163,9 +163,6 @@ class MainViewController: UITableViewController
 
     override func numberOfSections(in tableView: UITableView) -> Int
     {
-        // #warning Incomplete implementation, return the number of sections
-        
-        
         var bottomLoading = 0
         if(self.bottomLoading) {
             bottomLoading = 1
@@ -239,7 +236,7 @@ class MainViewController: UITableViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         //segue to DetailView
-        self.performSegue(withIdentifier: "DetailView", sender: self)
+        performSegue(withIdentifier: "DetailView", sender: self)
     }
 
 

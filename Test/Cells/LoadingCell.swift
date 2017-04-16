@@ -19,7 +19,7 @@ class LoadingCell: UITableViewCell {
     
     func startAnimating()
     {
-        self.activityIndicator.startAnimating()
+        activityIndicator.startAnimating()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

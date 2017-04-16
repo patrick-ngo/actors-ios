@@ -24,7 +24,7 @@ class API: NSObject
             let params = parameters
 
             //network request on background thread
-            Alamofire.request( self.baseUrl() + method, method: .get, parameters: params).responseJSON
+            Alamofire.request( baseUrl() + method, method: .get, parameters: params).responseJSON
             {   response in
                 
                 if let jsonData = response.result.value
