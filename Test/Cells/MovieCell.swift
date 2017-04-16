@@ -36,18 +36,22 @@ class MovieCell: UITableViewCell
     
     func populateData(data: [String:JSON])
     {
-        /*
-        //convert epoch time readable date
-        let dateValue = Double(data["release_date"]!.stringValue)
-        let epochTime: TimeInterval = dateValue!
-        let date = Date(timeIntervalSince1970: epochTime)
-        */
-        //TODO: fix this
-        
-
         //configure cell here
         nameLabel.text = data["original_title"]?.string
-        dateLabel.text = data["release_date"]?.string
+     
+        if let date = data["release_date"]?.double
+        {
+            //convert to epoch date
+            let epochTime:TimeInterval = date
+            let dateObject = Date(timeIntervalSince1970: epochTime)
+            
+            //date formatter
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            
+            dateLabel.text = dateFormatter.string(from: dateObject)
+        }
+        
         
         if let rating = data["vote_average"]?.double
         {
@@ -61,7 +65,7 @@ class MovieCell: UITableViewCell
         }
         
         
-        if let backdropImagePath = data["backdrop_path"]?.stringValue
+        if let backdropImagePath = data["backdrop_path"]?.string
         {
             thumbnailImageView.sd_setImage(with: URL(string: backdropImagePath))
         }
