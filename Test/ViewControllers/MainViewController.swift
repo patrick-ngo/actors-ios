@@ -94,6 +94,7 @@ class MainViewController: UITableViewController
     
     fileprivate func loadData()
     {
+        
         API.callMethod(method: "person/popular", parameters: ["page":String(self.page)], completionHandler:
             {   (result) -> () in
                 
@@ -110,10 +111,8 @@ class MainViewController: UITableViewController
                     }
                     
                     //set data
-//                    self.movieData?.append(contentsOf: movies["resultS"].arrayValue)
-                    
                     if let movieResults = movies["results"].array {
-                        self.movieData = movieResults
+                        self.movieData?.append(contentsOf: movieResults)
                     }
                     
                     //stop refresh animation
@@ -146,10 +145,10 @@ class MainViewController: UITableViewController
         }
         
         let scrollViewHeight = scrollView.frame.size.height
-        let scrollContentSizeHeight = scrollView.contentSize.height-100
+        let scrollContentSizeHeight = scrollView.contentSize.height
         let scrollOffset = scrollView.contentOffset.y
         
-        if (!bottomLoading && scrollOffset + scrollViewHeight > scrollContentSizeHeight) {
+        if (!bottomLoading && scrollOffset + scrollViewHeight > scrollContentSizeHeight - 100) {
             //We have scrolled near to the end, load the next page
             
             //add a page
