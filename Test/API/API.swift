@@ -12,16 +12,23 @@ import SwiftyJSON
 
 class API: NSObject
 {
+    static let API_KEY = "e4a3bc287b929e12897dd730b1b153e9"
+    static let BASE_URL_IMAGES_LOW = "https://image.tmdb.org/t/p/w185"
+    static let BASE_URL_IMAGES_HIGH = "https://image.tmdb.org/t/p/w500"
+    
     fileprivate class func baseUrl() -> String
     {
-        return  "http://test.gotouche.com/rest/"
+        return  "https://api.themoviedb.org/3/"
     }
     
     class func callMethod(method: String, parameters: [String:Any], completionHandler:@escaping (AnyObject?)->())
     {
         DispatchQueue.global(qos: .default).async
         {
-            let params = parameters
+            var params = parameters
+            
+            //always add api key
+            params["api_key"] = API_KEY
 
             //network request on background thread
             Alamofire.request( baseUrl() + method, method: .get, parameters: params).responseJSON
