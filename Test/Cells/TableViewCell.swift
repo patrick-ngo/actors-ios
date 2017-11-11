@@ -61,9 +61,12 @@ class TableViewCell: UITableViewCell {
         detailLabel.text = data["description"]?.string
         locationLabel.text = data["location"]?.string
         
-        if let profileImagePath = data["profile_path"]?.string
-        {
-            thumbnailImageView.sd_setImage(with: URL(string: profileImagePath))
+        
+        //poster image
+        if let profileImagePath = data["profile_path"]?.string {
+            
+            let imageUrl = URL(string: "\(API.BASE_URL_IMAGES_LOW)\(profileImagePath)")
+            self.thumbnailImageView.sd_setImage(with: imageUrl, placeholderImage: nil)
         }
     }
 }

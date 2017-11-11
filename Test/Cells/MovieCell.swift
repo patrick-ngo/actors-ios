@@ -39,17 +39,9 @@ class MovieCell: UITableViewCell
         //configure cell here
         nameLabel.text = data["original_title"]?.string
      
-        if let date = data["release_date"]?.double
+        if let date = data["release_date"]?.string
         {
-            //convert to epoch date
-            let epochTime:TimeInterval = date
-            let dateObject = Date(timeIntervalSince1970: epochTime)
-            
-            //date formatter
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
-            
-            dateLabel.text = dateFormatter.string(from: dateObject)
+            dateLabel.text = date
         }
         
         
@@ -64,10 +56,11 @@ class MovieCell: UITableViewCell
             votesLabel.text = voteCount + " votes"
         }
         
-        
-        if let backdropImagePath = data["backdrop_path"]?.string
-        {
-            thumbnailImageView.sd_setImage(with: URL(string: backdropImagePath))
+        //poster image
+        if let backdropImagePath = data["backdrop_path"]?.string {
+            
+            let imageUrl = URL(string: "\(API.BASE_URL_IMAGES_HIGH)\(backdropImagePath)")
+            self.thumbnailImageView.sd_setImage(with: imageUrl, placeholderImage: nil)
         }
     }
 

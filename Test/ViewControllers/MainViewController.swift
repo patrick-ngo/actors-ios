@@ -94,7 +94,7 @@ class MainViewController: UITableViewController
     
     fileprivate func loadData()
     {
-        API.callMethod(method: "actors", parameters: ["page":String(self.page)], completionHandler:
+        API.callMethod(method: "person/popular", parameters: ["page":String(self.page)], completionHandler:
             {   (result) -> () in
                 
                 if(result != nil)
@@ -110,7 +110,11 @@ class MainViewController: UITableViewController
                     }
                     
                     //set data
-                    self.movieData?.append(contentsOf: movies["data"].arrayValue)
+//                    self.movieData?.append(contentsOf: movies["resultS"].arrayValue)
+                    
+                    if let movieResults = movies["results"].array {
+                        self.movieData = movieResults
+                    }
                     
                     //stop refresh animation
                     self.refreshControl?.endRefreshing()
