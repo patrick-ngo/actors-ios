@@ -51,9 +51,9 @@ class MovieCell: UITableViewCell
         }
         
         
-        if let voteCount = data["vote_count"]?.string
+        if let voteCount = data["vote_count"]?.int
         {
-            votesLabel.text = voteCount + " votes"
+            votesLabel.text = "\(voteCount) votes"
         }
         
         //poster image
